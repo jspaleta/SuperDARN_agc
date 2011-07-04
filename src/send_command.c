@@ -9,6 +9,8 @@ int send_command(int fd,unsigned char address,unsigned char command,char results
         int i,ack,rlen;
 	ssize_t status,count;
         size_t  bytes_to_read; 
+        int offset;
+	unsigned char byte[2];
 //need to form the transmit block which consists of the following bytes:
 //
 // Byte 0               1               2               3               4
@@ -80,21 +82,27 @@ int send_command(int fd,unsigned char address,unsigned char command,char results
 //
         bytes_to_read=rlen;
 //Probably want to set some timeouts here
-        count=read(fd,rx_string,bytes_to_read);
+        offset=0;
+        count=1;
+        while(((int)count>0) && (offset <rlen) ) { 
+          count=read(fd,byte,1);
+          rx_string[offset]=byte[0];
+          offset++;
+        }
 	if(count==0){ //timed out
 		if(debug==ON)fprintf(stderr,"Timed out\n");
                 return(TIMEOUT);
 	}
         if(debug==ON){
-                fprintf(stderr,"%d characters received\n",(int)count);
+                fprintf(stderr,"%d characters received\n",(int)offset);
                 fprintf(stderr,"Received string (hex):\n");
                 for(i=0;i<rlen;i++){
                         fprintf(stderr,"%x ",(int)rx_string[i]);
                 }
                 fprintf(stderr,"\n");
         }
-        if(count!=rlen){ //wrong length packet
-                if(debug==ON)fprintf(stderr,"Bad rx length %d, expecting %d\n",(int)count,rlen);
+        if(offset!=rlen){ //wrong length packet
+                if(debug==ON)fprintf(stderr,"Bad rx length %d, expecting %d\n",(int)offset,rlen);
                 return(GARBLED);
         }
 

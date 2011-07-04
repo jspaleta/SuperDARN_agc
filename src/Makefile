@@ -2,12 +2,13 @@ OS:=$(shell uname -s)
 
 CC=gcc
 CFLAGS=-c -Wall 
-LFLAGS  = 
+LFLAGS  =-L"../iniparser3.0b/" 
 common_libs=
-linux_libs=
+linux_libs=-liniparser
 qnx_libs=
-INCLUDES=-I"include/"
-SOURCES=main.c send_command.c agc_results.c basbox_results.c pm_results.c
+INCLUDES=-I"../iniparser3.0b/src" -I"include/"
+SOURCES=main.c send_command.c agc_display.c\
+agc_results.c basbox_results.c pm_results.c
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=agc_monitor
 
