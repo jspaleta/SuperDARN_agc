@@ -7,8 +7,8 @@ common_libs=
 linux_libs=-liniparser
 qnx_libs=
 INCLUDES=-I"../iniparser3.0b/src" -I"include/"
-SOURCES=main.c send_command.c agc_display.c\
-agc_results.c basbox_results.c pm_results.c
+SOURCES=main.c send_command.c agc_display.c agc_save_ini.c agc_lockout_test.c\
+tx_port_open.c agc_results.c basbox_results.c basbox_display.c pm_results.c pm_display.c
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=agc_monitor
 

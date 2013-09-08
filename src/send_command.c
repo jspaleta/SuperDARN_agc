@@ -49,7 +49,7 @@ int send_command(int fd,unsigned char address,unsigned char command,char results
                 fprintf(stderr,"write error...exiting\n");
                 exit(-1);
         }
-
+	sleep(1);
         ack=OFF;
         switch(command){
                 case 1:
@@ -127,7 +127,7 @@ int send_command(int fd,unsigned char address,unsigned char command,char results
                 }
                 if(rx_string[3]!=tx_string[1]){ //check addresses match
                         if(debug==ON)fprintf(stderr,"xBad address, got %d, expected %d\n",(int)rx_string[3],(int)tx_string[1]);
-                        return(GARBLED);
+                        //return(GARBLED);
                 }
                 if(command==14)rlen=rlen-2; //get 2 extra strange chars from basbox!!
                 if(command==20)rlen=rlen-2; //get 2 extra strange chars from pm!!
@@ -137,15 +137,14 @@ int send_command(int fd,unsigned char address,unsigned char command,char results
                 }
                 if(bcc!=rx_string[rlen-1]){ //bad bcc
                         if(debug==ON)fprintf(stderr,"Bad bcc, calculated %d, got %d\n",(int)bcc,(int)rx_string[rlen-1]);
-                        return(GARBLED);
-                }else{
-//good status block so copy the results into results array
-                        for(i=4;i!=(rlen-1);i++){
-                                results[i-4]=rx_string[i];
-                        }
-                        return(STATUS); //status block ok
-                        if(debug==ON)fprintf(stderr,"Good status block\n");
+                        //return(GARBLED);
                 }
+//good status block so copy the results into results array
+                for(i=4;i!=(rlen-1);i++){
+                                results[i-4]=rx_string[i];
+                }
+                return(STATUS); //status block ok
+                if(debug==ON)fprintf(stderr,"Good status block\n");
         }
 	return(GARBLED);
 }
