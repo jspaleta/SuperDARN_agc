@@ -1,0 +1,10 @@
+#files being edited
+*~
+temp.out*
+
+# make and build files
+*.o
+*.so
+*.so.0
+*.a
+src/agc_monitor
