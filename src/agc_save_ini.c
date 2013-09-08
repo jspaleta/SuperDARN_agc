@@ -9,6 +9,7 @@ void agc_save_results(dictionary *agc_ini,int tx,struct agc_results *res,int tx_
 	char entry[120];
 	char value[120];
         char filename[120];
+        FILE *new_ini_file=NULL;
         char *time_string;
         int length;
 	struct timeval t0;
@@ -193,4 +194,6 @@ void agc_save_results(dictionary *agc_ini,int tx,struct agc_results *res,int tx_
         printf("fwd: %d\n",res->alg_fwd);
         printf("ref: %d\n",res->alg_ref);
 */
+        new_ini_file=fopen(filename,"w+"); 
+        iniparser_dump_ini(agc_ini, new_ini_file);
 }
