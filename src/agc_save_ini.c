@@ -197,5 +197,5 @@ void agc_save_results(dictionary *agc_ini,int tx,struct agc_results *res,int tx_
 */
         new_ini_file=fopen(filename,"w+"); 
         iniparser_dump_ini(agc_ini, new_ini_file);
-        fclose(new_init_file);
+        fclose(new_ini_file);
 }
