@@ -5,17 +5,15 @@
 #include "iniparser.h"
 #include "agc_commands.h"
 
-void agc_save_results(dictionary *agc_ini,int tx,struct agc_results *res,int tx_disabled[],int tx_lockout[]){
+void agc_save_results(dictionary *agc_ini,int tx,struct agc_results *res,int tx_disabled[],int tx_lockout[],char *configfile){
 	char entry[120];
 	char value[120];
-        char filename[120];
         FILE *new_ini_file=NULL;
         char *time_string;
         int length;
 	struct timeval t0;
         fprintf(stdout,"Saving agc ini\n");
         gettimeofday(&t0,NULL);
-        sprintf(filename,"%s","/tmp/agc.status");
         sprintf(entry,"tx_%d:time",tx);
         time_string=ctime(&t0.tv_sec);
         length=strlen(time_string);
@@ -195,7 +193,7 @@ void agc_save_results(dictionary *agc_ini,int tx,struct agc_results *res,int tx_
         printf("fwd: %d\n",res->alg_fwd);
         printf("ref: %d\n",res->alg_ref);
 */
-        new_ini_file=fopen(filename,"w+"); 
+        new_ini_file=fopen(configfile,"w+"); 
         iniparser_dump_ini(agc_ini, new_ini_file);
         fclose(new_ini_file);
 }

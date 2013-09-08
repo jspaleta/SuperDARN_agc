@@ -227,7 +227,7 @@ int main(int argc, char **argv){
                     agc_results(results,&agc_res);
                     agc_lockout_test(tx,&agc_res,tx_disabled,tx_lockout);
                     if(verbose > 0 ) agc_display_results(&agc_res);
-                    agc_save_results(agc_ini,tx,&agc_res,tx_disabled,tx_lockout);
+                    agc_save_results(agc_ini,tx,&agc_res,tx_disabled,tx_lockout,configfile);
                     break;
 		  default:
                     iniparser_set(agc_ini,entry,"UNKNOWN",NULL);
