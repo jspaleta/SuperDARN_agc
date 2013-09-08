@@ -84,18 +84,17 @@ int main(int argc, char **argv){
         /* Process arguments */
         while (1)
         {
-           /* getopt_long stores the option index here. */
-           int option_index = 0;
+          /* getopt_long stores the option index here. */
+          int option_index = 0;
      
-           arg = getopt_long (argc, argv, "abpvrsStx:c:o:h",
+          arg = getopt_long (argc, argv, "abpvrsStx:c:o:h",
                             long_options, &option_index);
      
-           /* Detect the end of the options. */
-           if (arg == -1)
-             break;
-
-	switch (arg)
-	{
+          /* Detect the end of the options. */
+          if (arg == -1)
+            break;
+          switch (arg)
+	  {
 		case 'a':
                   auto_loop=1;
 		break;
@@ -143,7 +142,7 @@ int main(int argc, char **argv){
      
 		default:
 		abort();
-	}
+	  }
         }
         if(command==0) {
           printf("Invalid command, read --help option\n");
