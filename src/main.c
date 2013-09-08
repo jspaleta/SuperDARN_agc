@@ -271,7 +271,7 @@ int main(int argc, char **argv){
                       agc_results(results,&agc_res);
                       agc_lockout_test(tx,&agc_res,tx_disabled,tx_lockout);
                       if (verbose > 0 ) agc_display_results(&agc_res);
-                      agc_save_results(agc_ini,tx,&agc_res,tx_disabled,tx_lockout);
+                      agc_save_results(agc_ini,tx,&agc_res,tx_disabled,tx_lockout,configfile);
                       if(agc_res.relay==OPEN) {
                         if((tx_disabled[tx]==0) && (tx_lockout[tx] < 3 )) { 
                           printf("TX %d has open relay: Attempting reset: %d %d\n",tx, tx_disabled[tx],tx_lockout[tx]);
