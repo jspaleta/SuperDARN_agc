@@ -13,6 +13,7 @@ void agc_save_results(dictionary *agc_ini,int tx,struct agc_results *res,int tx_
         char *time_string;
         int length;
 	struct timeval t0;
+        fprintf(stdout,"Saving agc ini\n");
         gettimeofday(&t0,NULL);
         sprintf(filename,"%s","/tmp/agc.status");
         sprintf(entry,"tx_%d:time",tx);
@@ -196,4 +197,5 @@ void agc_save_results(dictionary *agc_ini,int tx,struct agc_results *res,int tx_
 */
         new_ini_file=fopen(filename,"w+"); 
         iniparser_dump_ini(agc_ini, new_ini_file);
+        fclose(new_init_file);
 }
